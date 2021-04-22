@@ -42,7 +42,7 @@
     }
 
     .Img {
-        width: 386px;
+        width: 336px;
         border-bottom: 2px solid #2C2A2A;
         border-top: none;
         border-right: none;
@@ -147,9 +147,9 @@
         margin-right: 10px;
     }
 
-        .btn-Del:hover {
-            background: #f17777;
-        }
+    .btn-Del:hover {
+        background: #f17777;
+    }
 
     img {
         padding: 0px;
@@ -167,9 +167,9 @@
         transition: 0.5s;
     }
 
-        .btn-Edit:hover {
-            background: #f17777;
-        }
+    .btn-Edit:hover {
+        background: #f17777;
+    }
 
     .tablerow {
         background: white;
@@ -210,9 +210,60 @@
         height: 100px;
     }
 
-        ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(to right, #1093ff, #83d1e9);
-        }
+    ::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(to right, #1093ff, #83d1e9);
+    }
+    .formedit {
+        position: absolute;
+        height: 645px;
+        width: 500px;
+        background: white;
+        border-radius: 21px;
+        display: block;
+        top: 0px;
+        box-shadow: 0px 0px 10px rgba(0,0,0,0.8);
+        z-index:99;
+        left:320px;
+        display:none;
+    }
+    .formedit input{
+        margin-left:55px;
+    }
+    .formedit select {
+        margin-left:55px;
+    }
+    .formedit textarea {
+        margin-left:55px;
+    }
+    .formedit h2 {
+        margin-top:17px;
+        margin-left:55px;
+        font-family: 'Source Sans Pro', sans-serif;
+    }
+    .picturebox {
+        position: absolute;
+        height: 50px;
+        width: 50px;
+        border: 2px solid #2C2A2A;
+        display: inline-block;
+        top: 259px;
+    }
+    .formedit h2::after {
+        content: '';
+        bottom: 0;
+        width: 46px;
+        height: 3px;
+        background: #2C2A2A;
+        display: block;
+    }
+    .btn-x {
+        position:absolute;
+        top:12px;
+        left:457px;
+    }
+    .btn-x:hover {
+        cursor:pointer;
+    }
 
 </style>
 <h2>Product</h2>
@@ -230,7 +281,7 @@
     <br />
     <input class="Price" type="text" name="Price" placeholder="Price" />
     <br />
-    <input class="Img" type="file" name="Img" />
+    <input class="Img" type="file" name="Img" /><div class="picturebox"><img src="#" alt="fk" /></div>
     <br />
     <textarea class="Description" name="Decription" placeholder="Description"></textarea>
     <br />
@@ -238,6 +289,32 @@
     <br />
     <input class="btn-add" type="submit" value="Add Product" />
 </form>
+@*editform*@
+<form class="formedit" id="formedit" method="post" action="">
+    <h2>Edit</h2>
+    <img class="btn-x" onclick="ExitEdit();" src="~/Areas/User/Upload/Icon/iconcancel.png" alt="" />
+    <input type="text" class="Name" name="Name" placeholder="Name" />
+    <br />
+    <select class="Category" name="Category" id="Category" onchange="selectid_category(this);">
+        <option selected>Choose Category</option>
+        @*@foreach (var item in list)
+        {
+            <option value="@item.id">@item.name</option>
+        }*@
+    </select>
+    <input type="hidden" id="Category_id" name="Category_id" value="/" />
+    <br />
+    <input class="Price" type="text" name="Price" placeholder="Price" />
+    <br />
+    <input class="Img" type="file" name="Img"/>@*<div class="pictureboxedit"><img src="#" alt="fk" /></div>*@
+    <br />
+    <textarea class="Description" name="Decription" placeholder="Description"></textarea>
+    <br />
+    <input type="checkbox" name="Active" />
+    <br />
+    <input class="btn-add" type="submit" value="Update" />
+</form>
+@*editform done*@
 <div class="righside">
     <div class="headtable">
         <table class="headtable2" style="width:100%">
@@ -262,7 +339,7 @@
                         <td style="max-width:32px;">@item.price</td>
                         <td style="max-width:40px;"><img height="100" src="~/Areas/Admin/Upload/@item.name_image" alt="Alternate Text" /></td>
                         <td style="max-width:100px;">@item.description</td>
-                        <td style="max-width:40px;"><button type="button" onclick="Delete_Product(this);" data_iddelete="@item.id" class="btn-Del"><img width="20" src="~/Areas/Admin/Upload/Icon/icondelete.ico" alt="Alternate Text" /></button><button class="btn-Edit"><img width="20" src="~/Areas/Admin/Upload/Icon/iconedit.ico" alt="Alternate Text" /></button></td>
+                        <td style="max-width:40px;"><button type="button" onclick="Delete_Product(this);" data_iddelete="@item.id" class="btn-Del"><img width="20" src="~/Areas/Admin/Upload/Icon/icondelete.ico" alt="Alternate Text" /></button><button class="btn-Edit" onclick="showEdit();"><img width="20" src="~/Areas/Admin/Upload/Icon/iconedit.ico" alt="Alternate Text" /></button></td>
                     </tr>
                 </table>
             }
@@ -276,7 +353,7 @@
         $('#Category_id').val(id);
         }
 
-        function Delete_Product(q) {
+    function Delete_Product(q) {
             var id_Product = $(q).attr("data_iddelete")
             $.ajax({
                 method: "Post",
@@ -288,5 +365,14 @@
                     $(row_delete).remove();
             })
         }
+    function showEdit() {
+        var showEditform = document.getElementById("formedit");
+            showEditform.style.display = "block";
+        }
+        function ExitEdit() {
+            var ExitEdits = document.getElementById("formedit");
+            ExitEdits.style.display = "none";
+        }
+        
     </script>
 }
