@@ -64,6 +64,7 @@
 
     form {
         background: none;
+        padding:0;
     }
 
     h2 {
@@ -124,7 +125,7 @@
         width: 797px;
         height: 540px;
         background: white;
-        margin-top: 5px;
+        margin-top: 4px;
         border-radius: 8px;
         padding: 0;
         overflow: scroll;
@@ -180,20 +181,20 @@
         text-align: left;
     }
 
-        .tablerow:hover {
-            background: #FFDFDF;
-            cursor: pointer;
-        }
+    .tablerow:hover {
+        background: #FFDFDF;
+        cursor: pointer;
+    }
 
     .tablerow {
         margin-top: 10px;
         text-align: left;
     }
 
-        .tablerow tr td {
-            font-family: 'Source Sans Pro', sans-serif;
-            font-size: 13px;
-        }
+    .tablerow tr td {
+        font-family: 'Source Sans Pro', sans-serif;
+        font-size: 13px;
+    }
 
     ::-webkit-scrollbar {
         width: 2px;
@@ -212,6 +213,7 @@
         ::-webkit-scrollbar-thumb:hover {
             background: linear-gradient(to right, #1093ff, #83d1e9);
         }
+
 </style>
 <h2>Product</h2>
 <form method="post" action="@Url.Action("Create_Product")" enctype="multipart/form-data">
@@ -239,9 +241,8 @@
 <div class="righside">
     <div class="headtable">
         <table class="headtable2" style="width:100%">
-
             <tr>
-                <td style="max-width:40px;">Name</td>
+                <td style="max-width:55px;">Name</td>
                 <td style="max-width:51px;">Category</td>
                 <td style="max-width:60px;">Price</td>
                 <td style="max-width:58px;">Img</td>
@@ -250,22 +251,21 @@
             </tr>
         </table>
     </div>
+
     <div class="bodytable">
-        <table class="tablerow" style="width:100%">
             @foreach (var item in list2)
             {
-                <tr>
-                    <td style="max-width:40px;">@item.name_product</td>
-                    <td style="max-width:51px;">@item.name_category</td>
-                    <td style="max-width:55px;">@item.price</td>
-                    <td style="max-width:58px;"><img height="100" src="~/Areas/Admin/Upload/@item.name_image" alt="Alternate Text" /></td>
-                    <td style="max-width:100px;">@item.description</td>
-                    <td style="max-width:60px;"><button class="btn-Del"><img width="20" src="~/Areas/Admin/Upload/Icon/icondelete.ico" alt="Alternate Text" /></button><button class="btn-Edit"><img width="20" src="~/Areas/Admin/Upload/Icon/iconedit.ico" alt="Alternate Text" /></button></td>
-                </tr>
-
+                <table class="tablerow" style="width:100%">
+                    <tr>
+                        <td style="max-width:40px;">@item.name_product</td>
+                        <td style="max-width:33px;">@item.name_category</td>
+                        <td style="max-width:32px;">@item.price</td>
+                        <td style="max-width:40px;"><img height="100" src="~/Areas/Admin/Upload/@item.name_image" alt="Alternate Text" /></td>
+                        <td style="max-width:100px;">@item.description</td>
+                        <td style="max-width:40px;"><button class="btn-Del"><img width="20" src="~/Areas/Admin/Upload/Icon/icondelete.ico" alt="Alternate Text" /></button><button class="btn-Edit"><img width="20" src="~/Areas/Admin/Upload/Icon/iconedit.ico" alt="Alternate Text" /></button></td>
+                    </tr>
+                </table>
             }
-
-        </table>
     </div>
 </div>
 @section script_admin{
