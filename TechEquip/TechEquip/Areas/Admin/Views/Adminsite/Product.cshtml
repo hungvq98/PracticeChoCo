@@ -262,17 +262,31 @@
                         <td style="max-width:32px;">@item.price</td>
                         <td style="max-width:40px;"><img height="100" src="~/Areas/Admin/Upload/@item.name_image" alt="Alternate Text" /></td>
                         <td style="max-width:100px;">@item.description</td>
-                        <td style="max-width:40px;"><button class="btn-Del"><img width="20" src="~/Areas/Admin/Upload/Icon/icondelete.ico" alt="Alternate Text" /></button><button class="btn-Edit"><img width="20" src="~/Areas/Admin/Upload/Icon/iconedit.ico" alt="Alternate Text" /></button></td>
+                        <td style="max-width:40px;"><button type="button" onclick="Delete_Product(this);" data_iddelete="@item.id" class="btn-Del"><img width="20" src="~/Areas/Admin/Upload/Icon/icondelete.ico" alt="Alternate Text" /></button><button class="btn-Edit"><img width="20" src="~/Areas/Admin/Upload/Icon/iconedit.ico" alt="Alternate Text" /></button></td>
                     </tr>
                 </table>
             }
     </div>
 </div>
 @section script_admin{
+    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>*@
     <script>
     function selectid_category() {
         var id = $('#Category').val();
         $('#Category_id').val(id);
-    }
+        }
+
+        function Delete_Product(q) {
+            var id_Product = $(q).attr("data_iddelete")
+            $.ajax({
+                method: "Post",
+                url: "@Url.Action("Delete_Product")",
+                data: { id_Product}
+            })
+                .done(function (msg) {
+                    var row_delete = $('td').parents().get(1);
+                    $(row_delete).remove();
+            })
+        }
     </script>
 }

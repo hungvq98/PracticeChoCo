@@ -42,6 +42,24 @@ namespace TechEquip.Areas.Admin.Controllers
             pb.Cretae(pv);
             return RedirectToAction("Product");
         }
+
+
+        public ActionResult Edit_Product() {
+
+            return RedirectToAction("Product");
+        }
+        
+        [HttpPost]
+        public JsonResult Delete_Product()
+        {
+            int id = int.Parse(Request.Form["id_Product"]);
+            Models.Product_Bussiness pb = new Models.Product_Bussiness();
+            var q = pb.Get_id(id);
+            pb.Delete(q);
+            return Json("Success");
+        }
+
+
         public ActionResult Store()
         {
             return View();
