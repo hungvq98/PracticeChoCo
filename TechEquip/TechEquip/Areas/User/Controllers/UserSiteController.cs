@@ -17,6 +17,10 @@ namespace TechEquip.Areas.User.Controllers
         {
             return View();
         }
+        public ActionResult Checkout()
+        {
+            return View();
+        }
         
     }
 }

@@ -1,0 +1,254 @@
+﻿
+@{
+    ViewBag.Title = "Checkout";
+    Layout = "~/Areas/User/Views/Shared/UserPage.cshtml";
+}
+<style>
+    .container-cart {
+        padding: 0;
+        margin: 0;
+        background: white;
+        height: 700px;
+    }
+
+    .listproduct {
+        background: white;
+        height: 700px;
+        width: 1076px;
+    }
+
+        .listproduct .headlistbig p {
+            display: inline-flex;
+            padding: 0px;
+            margin-top: 50px;
+            margin-left: 50px;
+            height: 50px;
+            text-align: center;
+            font-family: 'Source Sans Pro', sans-serif;
+            font-weight: 600;
+            color: #707070;
+        }
+
+        .listproduct .headlist button {
+            height: 20px;
+            width: 20px;
+            background: #ECACAC;
+            border: none;
+            color: #707070;
+            cursor: pointer;
+        }
+    /*.headlist {
+        border-bottom: 2px solid #ECACAC;
+        padding:1px;
+    }*/
+    .numbertext {
+        width: 20px;
+        outline: none;
+        margin: 0 5px 0 5px;
+        height: 20px;
+        border: 1px solid #ECACAC;
+        color: #ECACAC;
+        text-align: center;
+    }
+
+    .listproduct .headlistbig p button {
+        height: 20px;
+        width: 20px;
+        background: #ECACAC;
+        border: none;
+        color: #707070;
+        cursor: pointer;
+    }
+
+    .checkboxfirst {
+        margin-left: 80px;
+    }
+
+    .headlistbig {
+        border-bottom: 2px solid #ECACAC;
+    }
+
+    .headlist table {
+        border-bottom: 2px solid #ECACAC;
+        padding: 0;
+        margin: 0;
+    }
+
+        .headlist table tr th {
+            padding: 0;
+            margin: 0;
+            font-family: 'Source Sans Pro', sans-serif;
+            color: #707070;
+            height: 100px;
+        }
+
+    .container-table {
+        padding: 10px;
+    }
+
+    .listproduct .headlistbig .product {
+        width: 111px;
+    }
+
+    .listproduct .headlistbig .name {
+        width: 189px;
+    }
+
+    .listproduct .headlistbig .price {
+        width: 142px;
+    }
+
+    .listproduct .headlistbig .quantity {
+        width: 176px;
+    }
+
+    .summary {
+        font-family: 'Source Sans Pro', sans-serif;
+        color: #707070;
+        font-weight: 600;
+        position: absolute;
+        top: 1033px;
+        left: 1100px;
+        width: 500px;
+        height: 512px;
+        background: white;
+        box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+    }
+
+        .summary p {
+            padding: 40px;
+        }
+
+    .titleofsummary {
+        height: 80px;
+        background: #ECACAC;
+        padding: 40px;
+    }
+
+    .foottotal .total {
+        height: 80px;
+        background: #F3D1D1;
+        margin-top: 156px;
+        padding: 40px;
+    }
+
+    .btn-checkout {
+        width: 500px;
+        font-weight: 600;
+        position: absolute;
+        top: 1553px;
+        left: 1100px;
+        width: 500px;
+        height: 70px;
+        border: none;
+        color: white;
+        background: #363333;
+        box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+    }
+
+    .btn-del-all {
+        width: 250px;
+        position: absolute;
+        top: 975px;
+        left: 1100px;
+        height: 50px;
+        border: none;
+        font-weight: 600;
+        color: #707070;
+        background: #F3D1D1;
+        display: none;
+    }
+
+    ::-webkit-scrollbar {
+        width: 2px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: white;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #EBABAB;
+        border-radius: 20px;
+        height: 100px;
+    }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(to right, #1093ff, #83d1e9);
+        }
+
+    .headlist {
+        height: 600px;
+        overflow: scroll;
+        overflow-x: hidden;
+    }
+</style>
+<div class="container-cart">
+    <div class="listproduct">
+        <div class="headlistbig">
+            <input class="checkboxfirst" id="checkboxfirst" onclick="checkFluency();" type="checkbox" value="" />
+            <p class="product">Product</p>
+            <p class="name">Name</p>
+            <p class="price">Price</p>
+            <p class="quantity">Quantity</p>
+            <p class="total">Total</p>
+        </div>
+
+        <div class="headlist">
+            @*auto render data*@
+            <table style="width:100%">
+                <tr>
+                    <th style="max-width:18px;"><input class="checkboxfirst" id="checkboxfirst2" onclick="checkFluency1();" type="checkbox" value="" /></th>
+                    <th style="max-width:180px;"><img src="#" alt="fk" /></th>
+                    <th style="max-width:73px;">Keyboard</th>
+                    <th style="max-width:180px;">120$</th>
+                    <th style="max-width:180px;"><button>-</button><input class="numbertext" maxlength="2" max="10" type="text" name="number" value="" /><button>+</button></th>
+                    <th style="max-width:180px;">120$</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <button class="btn-del-all" id="btndelall">DELETE</button>
+    <div class="summary">
+        <div class="headsummary">
+            <p class="titleofsummary">SUMMARY :</p>
+        </div>
+        <p class="subtotal">SUBTOTAL :</p>
+        <p class="voucher">VOUCHER :</p>
+        <div class="foottotal">
+            <p class="total">TOTAL :</p>
+        </div>
+    </div>
+    <button class="btn-checkout">CHECKOUT</button>
+
+
+</div>
+@section script_admin{
+    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>*@
+    <script>
+        function checkFluency() {
+            var checkbox = document.getElementById("checkboxfirst");
+
+            var btndel = document.getElementById("btndelall");
+            if (checkbox.checked != true) {
+                btndel.style.display = 'none';
+            }
+            else {
+                btndel.style.display = 'block';
+            }
+        }
+        function checkFluency1() {
+            var checkbox1 = document.getElementById("checkboxfirst2");
+
+            var btndel = document.getElementById("btndelall");
+            if (checkbox1.checked != true) {
+                btndel.style.display = 'none';
+            }
+            else {
+                btndel.style.display = 'block';
+            }
+        }
+    </script>
+}
+
